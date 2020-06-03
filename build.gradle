@@ -1,0 +1,34 @@
+plugins {
+    id "java"
+}
+
+group "net.nyrheim"
+version "0.1.0-SNAPSHOT"
+
+def githubUsername = ""
+def githubToken = ""
+def githubPropertiesFile = new File(project.projectDir, "github.properties")
+if (githubPropertiesFile.exists()) {
+    def githubProperties = new Properties()
+    githubProperties.load(new FileInputStream(githubPropertiesFile))
+    githubUsername = githubProperties.get("github-username")
+    githubToken = githubProperties.get("github-token")
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://hub.spigotmc.org/nexus/content/groups/public/" }
+    maven {
+        url "https://maven.pkg.github.com/Nyrheim/PnP"
+        credentials {
+            username githubUsername
+            password githubToken
+        }
+    }
+}
+
+dependencies {
+    implementation group: "org.spigotmc", name: "spigot-api", version: "1.15.2-R0.1-SNAPSHOT"
+    implementation group: "com.github.liamvii.penandpaper", name: "PnP", version: "0.1.0"
+    testImplementation group: "junit", name: "junit", version: "4.12"
+}
