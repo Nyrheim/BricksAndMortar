@@ -1,19 +1,19 @@
 package net.nyrheim.bricksnmortar;
 
-import com.github.liamvii.penandpaper.Pen;
+import net.nyrheim.penandpaper.PenAndPaper;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BricksNMortar extends JavaPlugin {
 
-    private Pen pnp;
+    private PenAndPaper penAndPaper;
 
     @Override
     public void onEnable() {
-        pnp = (Pen) getServer().getPluginManager().getPlugin("PenandPaper");
+        penAndPaper = (PenAndPaper) getServer().getPluginManager().getPlugin("PenAndPaper");
     }
 
-    public Pen getPnP() {
-        return pnp;
+    public PenAndPaper getPenAndPaper() {
+        return penAndPaper;
     }
 
 }

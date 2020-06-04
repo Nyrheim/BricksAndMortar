@@ -18,8 +18,9 @@ if (githubPropertiesFile.exists()) {
 repositories {
     mavenCentral()
     maven { url "https://hub.spigotmc.org/nexus/content/groups/public/" }
+    maven { url "https://repo.rpkit.com/repository/maven-public/" }
     maven {
-        url "https://maven.pkg.github.com/Nyrheim/PnP"
+        url "https://maven.pkg.github.com/Nyrheim/PenAndPaper"
         credentials {
             username githubUsername
             password githubToken
@@ -29,6 +30,8 @@ repositories {
 
 dependencies {
     implementation group: "org.spigotmc", name: "spigot-api", version: "1.15.2-R0.1-SNAPSHOT"
-    implementation group: "com.github.liamvii.penandpaper", name: "PnP", version: "0.1.0"
+    implementation group: "net.nyrheim", name: "PenAndPaper", version: "0.2.0"
+    implementation group: "com.rpkit", name: "rpk-core", version: "1.9.0"
+    implementation group: "com.rpkit", name: "rpk-core-bukkit", version: "1.9.0"
     testImplementation group: "junit", name: "junit", version: "4.12"
 }

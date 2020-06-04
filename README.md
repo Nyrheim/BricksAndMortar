@@ -1,2 +1,2 @@
-# BricksNMortar
+# BricksAndMortar
 Nyrheim professions plugin
