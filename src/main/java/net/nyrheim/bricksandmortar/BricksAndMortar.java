@@ -1,9 +1,9 @@
-package net.nyrheim.bricksnmortar;
+package net.nyrheim.bricksandmortar;
 
 import net.nyrheim.penandpaper.PenAndPaper;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class BricksNMortar extends JavaPlugin {
+public class BricksAndMortar extends JavaPlugin {
 
     private PenAndPaper penAndPaper;
 

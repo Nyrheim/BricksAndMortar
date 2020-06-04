@@ -3,4 +3,4 @@ version: @version@
 authors:
 - Liam
 - Ren
-main: net.nyrheim.bricksnmortar.BricksNMortar
+main: net.nyrheim.bricksandmortar.BricksAndMortar
