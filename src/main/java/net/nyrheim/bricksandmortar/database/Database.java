@@ -16,7 +16,7 @@ import java.util.Map;
 
 import static org.jooq.SQLDialect.MYSQL;
 
-public class Database {
+public final class Database {
 
     private final BricksAndMortar plugin;
 

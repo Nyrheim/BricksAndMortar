@@ -3,6 +3,7 @@ package net.nyrheim.bricksandmortar.recipe;
 import com.rpkit.itemquality.bukkit.itemquality.RPKItemQuality;
 import net.nyrheim.bricksandmortar.profession.Profession;
 import net.nyrheim.penandpaper.item.ItemType;
+import net.nyrheim.penandpaper.item.PenItemStack;
 import org.bukkit.Material;
 
 import java.util.List;
@@ -15,8 +16,10 @@ public final class BricksRecipe {
     private final int minimumLevel;
     private final ItemType toolkit;
     private final List<RPKItemQuality> permittedToolkitQualities;
-    private final ItemType result;
+    private final PenItemStack result;
     private final Map<ItemType, Integer> ingredients;
+    private final int exhaustion;
+    private final int experience;
 
     public BricksRecipe(
             Material workstation,
@@ -24,8 +27,10 @@ public final class BricksRecipe {
             int minimumLevel,
             ItemType toolkit,
             List<RPKItemQuality> permittedToolkitQualities,
-            ItemType result,
-            Map<ItemType, Integer> ingredients
+            PenItemStack result,
+            Map<ItemType, Integer> ingredients,
+            int exhaustion,
+            int experience
     ) {
         this.workstation = workstation;
         this.profession = profession;
@@ -34,6 +39,8 @@ public final class BricksRecipe {
         this.permittedToolkitQualities = permittedToolkitQualities;
         this.result = result;
         this.ingredients = ingredients;
+        this.exhaustion = exhaustion;
+        this.experience = experience;
     }
 
     public Material getWorkstation() {
@@ -56,12 +63,20 @@ public final class BricksRecipe {
         return permittedToolkitQualities;
     }
 
-    public ItemType getResult() {
+    public PenItemStack getResult() {
         return result;
     }
 
     public Map<ItemType, Integer> getIngredients() {
         return ingredients;
+    }
+
+    public int getExhaustion() {
+        return exhaustion;
+    }
+
+    public int getExperience() {
+        return experience;
     }
 
 }
