@@ -42,7 +42,7 @@ public final class ProfessionCommand implements CommandExecutor {
                     sender.sendMessage(RED + "Usage: /" + label + " [set|list]");
             }
         } else {
-            sender.sendMessage(RED + "Usage: /" + label + "[set|list]");
+            sender.sendMessage(RED + "Usage: /" + label + " [set|list]");
         }
         return true;
     }
