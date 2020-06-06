@@ -4,3 +4,17 @@ authors:
 - Liam
 - Ren
 main: net.nyrheim.bricksandmortar.BricksAndMortar
+depend:
+- rpk-core-bukkit
+- rpk-item-quality-lib-bukkit
+- PenAndPaper
+api-version: 1.15
+commands:
+  profession:
+    description: |
+      Profession management command
+      /profession set [profession] - Sets your profession
+      /profession list - Lists available professions
+    usage: /<command> [set|list]
+    aliases:
+    - prof
