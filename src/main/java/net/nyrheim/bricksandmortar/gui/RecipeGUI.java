@@ -28,7 +28,7 @@ import static org.bukkit.ChatColor.WHITE;
 import static org.bukkit.Material.AIR;
 import static org.bukkit.Sound.BLOCK_ANVIL_USE;
 
-public class RecipeGUI implements InventoryHolder {
+public final class RecipeGUI implements InventoryHolder {
 
     private final BricksAndMortar plugin;
     private final Inventory inventory;
@@ -52,7 +52,7 @@ public class RecipeGUI implements InventoryHolder {
                 .skip(page * 18)
                 .limit(18)
                 .forEach(recipe -> {
-                    ItemStack item = new PenItemStack(recipe.getResult(), 1).toItemStack();
+                    ItemStack item = recipe.getResult().toItemStack();
                     ItemMeta meta = item.getItemMeta();
                     if (meta != null) {
                         List<String> lore = meta.getLore();
@@ -108,12 +108,14 @@ public class RecipeGUI implements InventoryHolder {
                 exception.printStackTrace();
                 return;
             }
-            RPKItemQuality itemQuality = itemQualityProvider.getItemQuality(itemInHand);
-            if (itemQuality == null) return;
-            if (!recipe.getPermittedToolkitQualities().stream()
-                    .map(RPKItemQuality::getName)
-                    .collect(Collectors.toSet())
-                    .contains(itemQuality.getName())) return;
+            if (!recipe.getPermittedToolkitQualities().isEmpty()) {
+                RPKItemQuality itemQuality = itemQualityProvider.getItemQuality(itemInHand);
+                if (itemQuality == null) return;
+                if (!recipe.getPermittedToolkitQualities().stream()
+                        .map(RPKItemQuality::getName)
+                        .collect(Collectors.toSet())
+                        .contains(itemQuality.getName())) return;
+            }
             PenPlayerService playerService = plugin.getServices().get(PenPlayerService.class);
             PenPlayer penPlayer = playerService.getPlayer(player);
             PenCharacterService characterService = plugin.getServices().get(PenCharacterService.class);
@@ -158,7 +160,12 @@ public class RecipeGUI implements InventoryHolder {
                     }
                 }
             }
-            player.getInventory().addItem(new PenItemStack(recipe.getResult(), 1).toItemStack());
+            player.getInventory().addItem(recipe.getResult().toItemStack())
+                    .values()
+                    .forEach(item -> player.getWorld().dropItem(player.getLocation(), item));
+            character.setExhaustion(character.getExhaustion() + recipe.getExhaustion());
+            characterService.updateCharacter(character);
+            professionService.setExperience(character, professionService.getExperience(character) + recipe.getExperience());
             player.playSound(player.getLocation(), BLOCK_ANVIL_USE, 1f, 1f);
             player.closeInventory();
         }

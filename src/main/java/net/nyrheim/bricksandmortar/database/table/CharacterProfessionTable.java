@@ -16,7 +16,7 @@ import static net.nyrheim.bricksandmortar.database.jooq.Tables.CHARACTER_PROFESS
 import static org.jooq.impl.DSL.constraint;
 import static org.jooq.impl.DSL.table;
 
-public class CharacterProfessionTable implements Table {
+public final class CharacterProfessionTable implements Table {
 
     private final BricksAndMortar plugin;
     private final Database database;
