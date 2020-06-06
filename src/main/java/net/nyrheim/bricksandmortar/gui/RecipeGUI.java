@@ -144,7 +144,9 @@ public class RecipeGUI implements InventoryHolder {
                 for (int i = 0; i < player.getInventory().getSize(); i++) {
                     ItemStack item = player.getInventory().getItem(i);
                     if (item == null) continue;
-                    if (PenItemStack.fromItemStack(item).getType() == itemType) {
+                    PenItemStack penItemStack = PenItemStack.fromItemStack(item);
+                    if (penItemStack == null) continue;
+                    if (penItemStack.getType() == itemType) {
                         if (item.getAmount() > amountRequired) {
                             item.setAmount(item.getAmount() - amountRequired);
                             player.getInventory().setItem(i, item);
