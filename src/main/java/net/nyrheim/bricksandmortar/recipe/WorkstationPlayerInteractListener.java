@@ -5,8 +5,13 @@ import com.rpkit.itemquality.bukkit.itemquality.RPKItemQuality;
 import com.rpkit.itemquality.bukkit.itemquality.RPKItemQualityProvider;
 import net.nyrheim.bricksandmortar.BricksAndMortar;
 import net.nyrheim.bricksandmortar.gui.RecipeGUI;
+import net.nyrheim.bricksandmortar.profession.BricksProfessionService;
+import net.nyrheim.penandpaper.character.PenCharacter;
+import net.nyrheim.penandpaper.character.PenCharacterService;
 import net.nyrheim.penandpaper.item.ItemType;
 import net.nyrheim.penandpaper.item.PenItemStack;
+import net.nyrheim.penandpaper.player.PenPlayer;
+import net.nyrheim.penandpaper.player.PenPlayerService;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -50,12 +55,21 @@ public final class WorkstationPlayerInteractListener implements Listener {
                         if (potentialRecipe.getWorkstation() != clickedBlock.getType()) return false;
                         ItemStack itemInHand = event.getPlayer().getInventory().getItemInMainHand();
                         if (itemInHand.getType() == AIR) return false;
-                        RPKItemQuality itemQuality = itemQualityProvider.getItemQuality(itemInHand);
-                        if (itemQuality == null) return false;
-                        if (!potentialRecipe.getPermittedToolkitQualities().stream()
-                                .map(RPKItemQuality::getName)
-                                .collect(Collectors.toSet())
-                                .contains(itemQuality.getName())) return false;
+                        if (!potentialRecipe.getPermittedToolkitQualities().isEmpty()) {
+                            RPKItemQuality itemQuality = itemQualityProvider.getItemQuality(itemInHand);
+                            if (itemQuality == null) return false;
+                            if (!potentialRecipe.getPermittedToolkitQualities().stream()
+                                    .map(RPKItemQuality::getName)
+                                    .collect(Collectors.toSet())
+                                    .contains(itemQuality.getName())) return false;
+                        }
+                        PenPlayerService playerService = plugin.getServices().get(PenPlayerService.class);
+                        PenPlayer penPlayer = playerService.getPlayer(event.getPlayer());
+                        PenCharacterService characterService = plugin.getServices().get(PenCharacterService.class);
+                        PenCharacter character = characterService.getActiveCharacter(penPlayer);
+                        if (character == null) return false;
+                        BricksProfessionService professionService = plugin.getServices().get(BricksProfessionService.class);
+                        if (professionService.getProfession(character) != potentialRecipe.getProfession()) return false;
                         if (PenItemStack.fromItemStack(itemInHand).getType() != potentialRecipe.getToolkit()) return false;
                         ItemStack[] inventoryContents = event.getPlayer().getInventory().getContents();
                         PenItemStack[] penContents = Arrays.stream(inventoryContents)

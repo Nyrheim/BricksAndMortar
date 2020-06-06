@@ -45,7 +45,8 @@ public final class CharacterProfessionTable implements Table {
                                 .references(table("character"), table("character").field("id", SQLDataType.INTEGER))
                                 .onDeleteCascade()
                                 .onUpdateCascade()
-                );
+                )
+                .execute();
     }
 
     public CharacterProfessionExperience get(CharacterId characterId) {
