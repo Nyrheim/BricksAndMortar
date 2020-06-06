@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import static org.bukkit.event.inventory.InventoryType.SlotType.CONTAINER;
+
 public final class RecipeGUIInventoryClickListener implements Listener {
 
     @EventHandler
@@ -14,6 +16,9 @@ public final class RecipeGUIInventoryClickListener implements Listener {
             return;
         }
         if (!(event.getWhoClicked() instanceof Player)) {
+            return;
+        }
+        if (event.getSlotType() != CONTAINER) {
             return;
         }
         RecipeGUI gui = (RecipeGUI) event.getInventory().getHolder();
