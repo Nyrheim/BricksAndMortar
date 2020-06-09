@@ -8,7 +8,7 @@ depend:
 - rpk-core-bukkit
 - rpk-item-quality-lib-bukkit
 - PenAndPaper
-api-version: 1.15
+api-version: 1.14
 commands:
   profession:
     description: |

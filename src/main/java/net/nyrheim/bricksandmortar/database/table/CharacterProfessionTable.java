@@ -10,11 +10,10 @@ import org.ehcache.Cache;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
 import org.jooq.Record;
-import org.jooq.impl.SQLDataType;
 
 import static net.nyrheim.bricksandmortar.database.jooq.Tables.CHARACTER_PROFESSION;
-import static org.jooq.impl.DSL.constraint;
-import static org.jooq.impl.DSL.table;
+import static org.jooq.impl.DSL.*;
+import static org.jooq.impl.SQLDataType.INTEGER;
 
 public final class CharacterProfessionTable implements Table {
 
@@ -42,7 +41,7 @@ public final class CharacterProfessionTable implements Table {
                                 .primaryKey(CHARACTER_PROFESSION.CHARACTER_ID),
                         constraint("character_profession_character_id_fk")
                                 .foreignKey(CHARACTER_PROFESSION.CHARACTER_ID)
-                                .references(table("character"), table("character").field("id", SQLDataType.INTEGER))
+                                .references(table("`character`"), field("`id`", INTEGER))
                                 .onDeleteCascade()
                                 .onUpdateCascade()
                 )
