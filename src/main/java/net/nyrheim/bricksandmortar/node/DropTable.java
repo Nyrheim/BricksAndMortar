@@ -1,7 +1,11 @@
 package net.nyrheim.bricksandmortar.node;
 
+import net.nyrheim.penandpaper.item.ItemType;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public final class DropTable {
 
@@ -46,6 +50,22 @@ public final class DropTable {
 
     public void removeItem(DropTableItem item) {
         items.remove(item);
+    }
+
+    public DropTableItem chooseItem(ItemType toolType) {
+        List<DropTableItem> validItems = getItems().stream()
+                .filter(item -> item.getToolType() == toolType)
+                .collect(Collectors.toList());
+        if (validItems.isEmpty()) return null;
+        int chanceSum = validItems.stream().map(DropTableItem::getChance).reduce(0, Integer::sum);
+        Random random = new Random();
+        int choice = random.nextInt(chanceSum);
+        int sum = 0;
+        for (DropTableItem item : validItems) {
+            sum += item.getChance();
+            if (sum > choice) return item;
+        }
+        return null;
     }
 
 }

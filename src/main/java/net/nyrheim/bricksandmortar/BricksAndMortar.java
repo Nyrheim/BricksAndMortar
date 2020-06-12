@@ -9,6 +9,7 @@ import net.nyrheim.bricksandmortar.command.node.NodeCommand;
 import net.nyrheim.bricksandmortar.command.profession.ProfessionCommand;
 import net.nyrheim.bricksandmortar.database.Database;
 import net.nyrheim.bricksandmortar.node.BricksNodeService;
+import net.nyrheim.bricksandmortar.node.NodePlayerInteractListener;
 import net.nyrheim.bricksandmortar.profession.BricksProfessionService;
 import net.nyrheim.bricksandmortar.recipe.BricksRecipeService;
 import net.nyrheim.bricksandmortar.recipe.RecipeGUIInventoryClickListener;
@@ -78,6 +79,7 @@ public final class BricksAndMortar extends RPKBukkitPlugin implements Listener {
         registerListeners(
                 new RecipeGUIInventoryClickListener(),
                 new WorkstationPlayerInteractListener(this),
+                new NodePlayerInteractListener(this),
                 this
         );
     }

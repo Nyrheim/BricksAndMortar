@@ -4,6 +4,7 @@ import net.nyrheim.bricksandmortar.database.Database;
 import net.nyrheim.bricksandmortar.database.table.DropTableItemTable;
 import net.nyrheim.bricksandmortar.database.table.DropTableTable;
 import net.nyrheim.bricksandmortar.database.table.NodeTable;
+import org.bukkit.Location;
 
 import java.util.List;
 
@@ -69,6 +70,10 @@ public final class BricksNodeService {
 
     public DropTable getDropTable(DropTableItem dropTableItem) {
         return database.getTable(DropTableItemTable.class).getDropTable(dropTableItem);
+    }
+
+    public List<Node> getNodesAt(Location location) {
+        return database.getTable(NodeTable.class).getNodesAt(location);
     }
 
 }

@@ -80,6 +80,7 @@ public final class DropTableItemTable implements Table {
                 .where(DROP_TABLE_ITEM.ID.eq(id.getValue()))
                 .fetchOne();
         DropTableItem dropTableItem = new DropTableItem(
+                plugin,
                 id,
                 ItemType.getByName(result.get(DROP_TABLE_ITEM.ITEM_TYPE)),
                 result.get(DROP_TABLE_ITEM.AMOUNT),

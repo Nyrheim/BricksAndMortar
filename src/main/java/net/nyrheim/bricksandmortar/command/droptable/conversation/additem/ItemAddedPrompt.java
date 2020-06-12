@@ -27,6 +27,7 @@ public final class ItemAddedPrompt extends MessagePrompt {
         BricksNodeService nodeService = plugin.getServices().get(BricksNodeService.class);
         DropTable dropTable = (DropTable) context.getSessionData("dropTable");
         dropTable.addItem(new DropTableItem(
+                plugin,
                 (ItemType) context.getSessionData("itemType"),
                 (int) context.getSessionData("amount"),
                 (RPKItemQuality) context.getSessionData("quality"),

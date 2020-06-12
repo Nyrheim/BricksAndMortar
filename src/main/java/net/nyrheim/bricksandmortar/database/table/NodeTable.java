@@ -11,6 +11,10 @@ import org.ehcache.Cache;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
 import org.jooq.Record;
+import org.jooq.Record1;
+import org.jooq.Result;
+
+import java.util.List;
 
 import static net.nyrheim.bricksandmortar.database.jooq.Tables.DROP_TABLE;
 import static net.nyrheim.bricksandmortar.database.jooq.Tables.NODE;
@@ -40,6 +44,8 @@ public final class NodeTable implements Table {
         database.create()
                 .createTableIfNotExists(NODE)
                 .column(NODE.ID)
+                .column(NODE.NAME)
+                .column(NODE.WORLD)
                 .column(NODE.MIN_X)
                 .column(NODE.MIN_Y)
                 .column(NODE.MIN_Z)
@@ -192,6 +198,21 @@ public final class NodeTable implements Table {
         cache.put(node.getId().getValue(), node);
         nameCache.put(node.getName(), node.getId().getValue());
         return node;
+    }
+
+    public List<Node> getNodesAt(Location location) {
+        Result<Record1<Integer>> results = database.create()
+                .select(NODE.ID)
+                .from(NODE)
+                .where(NODE.WORLD.eq(location.getWorld().getName()))
+                .and(NODE.MAX_X.greaterOrEqual(location.getBlockX()))
+                .and(NODE.MAX_Y.greaterOrEqual(location.getBlockY()))
+                .and(NODE.MAX_Z.greaterOrEqual(location.getBlockZ()))
+                .and(NODE.MIN_X.lessOrEqual(location.getBlockX()))
+                .and(NODE.MIN_Y.lessOrEqual(location.getBlockY()))
+                .and(NODE.MIN_Z.lessOrEqual(location.getBlockZ()))
+                .fetch();
+        return results.map(result -> get(new NodeId(result.get(NODE.ID))));
     }
 
     public void delete(Node node) {
