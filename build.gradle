@@ -44,7 +44,9 @@ dependencies {
     implementation group: "net.nyrheim", name: "PenAndPaper", version: "0.5.0"
     implementation group: "com.rpkit", name: "rpk-core", version: "1.9.0"
     implementation group: "com.rpkit", name: "rpk-core-bukkit", version: "1.9.0"
+    implementation group: "com.rpkit", name: "rpk-player-lib-bukkit", version: "1.9.0"
     implementation group: "com.rpkit", name: "rpk-item-quality-lib-bukkit", version: "1.9.0"
+    implementation group: "com.rpkit", name: "rpk-selection-lib-bukkit", version: "1.9.0"
     testImplementation group: "junit", name: "junit", version: "4.12"
 }
 import org.apache.tools.ant.filters.ReplaceTokens

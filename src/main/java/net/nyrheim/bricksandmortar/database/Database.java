@@ -3,8 +3,7 @@ package net.nyrheim.bricksandmortar.database;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import net.nyrheim.bricksandmortar.BricksAndMortar;
-import net.nyrheim.bricksandmortar.database.table.CharacterProfessionTable;
-import net.nyrheim.bricksandmortar.database.table.Table;
+import net.nyrheim.bricksandmortar.database.table.*;
 import org.ehcache.CacheManager;
 import org.ehcache.config.builders.CacheManagerBuilder;
 import org.jooq.DSLContext;
@@ -38,7 +37,11 @@ public final class Database {
 
         tables = new HashMap<>();
 
+        // Order is important - node and drop table item both have FK depending on drop table
         addTable(new CharacterProfessionTable(plugin, this));
+        addTable(new DropTableTable(plugin, this));
+        addTable(new DropTableItemTable(plugin, this));
+        addTable(new NodeTable(plugin, this));
     }
 
     public CacheManager getCacheManager() {

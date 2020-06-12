@@ -5,6 +5,9 @@ package net.nyrheim.bricksandmortar.database.jooq;
 
 
 import net.nyrheim.bricksandmortar.database.jooq.tables.CharacterProfession;
+import net.nyrheim.bricksandmortar.database.jooq.tables.DropTable;
+import net.nyrheim.bricksandmortar.database.jooq.tables.DropTableItem;
+import net.nyrheim.bricksandmortar.database.jooq.tables.Node;
 
 
 /**
@@ -17,4 +20,19 @@ public class Tables {
      * The table <code>nyrheim.character_profession</code>.
      */
     public static final CharacterProfession CHARACTER_PROFESSION = CharacterProfession.CHARACTER_PROFESSION;
+
+    /**
+     * The table <code>nyrheim.drop_table</code>.
+     */
+    public static final DropTable DROP_TABLE = DropTable.DROP_TABLE;
+
+    /**
+     * The table <code>nyrheim.drop_table_item</code>.
+     */
+    public static final DropTableItem DROP_TABLE_ITEM = DropTableItem.DROP_TABLE_ITEM;
+
+    /**
+     * The table <code>nyrheim.node</code>.
+     */
+    public static final Node NODE = Node.NODE;
 }
