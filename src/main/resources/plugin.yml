@@ -7,6 +7,7 @@ main: net.nyrheim.bricksandmortar.BricksAndMortar
 depend:
 - rpk-core-bukkit
 - rpk-item-quality-lib-bukkit
+- rpk-selection-lib-bukkit
 - PenAndPaper
 api-version: 1.14
 commands:
@@ -18,3 +19,42 @@ commands:
     usage: /<command> [set|list]
     aliases:
     - prof
+  node:
+    description: |
+      Node management command
+      /node create [name] [drop table] - Creates a node using your current selection
+      /node delete [name] - Deletes a node
+  droptable:
+    description: |
+      Drop table management command
+      /droptable additem [drop table] - Adds a new item to the specified drop table
+      /droptable create [name] - Creates a new drop table
+      /droptable delete [name] - Deletes the specified drop table
+      /droptable list - Lists all available drop tables
+      /droptable removeitem [id] - Removes a drop table item
+      /droptable view [name] - Views a drop table
+permissions:
+  bricksandmortar.command.node.create:
+    description: Allows creation of nodes
+    default: op
+  bricksandmortar.command.node.delete:
+    description: Allows deletion of nodes
+    default: op
+  bricksandmortar.command.droptable.additem:
+    description: Allows adding items to drop tables
+    default: op
+  bricksandmortar.command.droptable.create:
+    description: Allows creating drop tables
+    default: op
+  bricksandmortar.command.droptable.delete:
+    description: Allows deleting drop tables
+    default: op
+  bricksandmortar.command.droptable.list:
+    description: Allows listing drop tables
+    default: op
+  bricksandmortar.command.droptable.removeitem:
+    description: Allows removing items from drop tables
+    default: op
+  bricksandmortar.command.droptable.view:
+    description: Allows viewing drop tables
+    default: op

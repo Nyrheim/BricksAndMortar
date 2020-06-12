@@ -5,8 +5,16 @@ package net.nyrheim.bricksandmortar.database.jooq;
 
 
 import net.nyrheim.bricksandmortar.database.jooq.tables.CharacterProfession;
+import net.nyrheim.bricksandmortar.database.jooq.tables.DropTable;
+import net.nyrheim.bricksandmortar.database.jooq.tables.DropTableItem;
+import net.nyrheim.bricksandmortar.database.jooq.tables.Node;
 import net.nyrheim.bricksandmortar.database.jooq.tables.records.CharacterProfessionRecord;
+import net.nyrheim.bricksandmortar.database.jooq.tables.records.DropTableItemRecord;
+import net.nyrheim.bricksandmortar.database.jooq.tables.records.DropTableRecord;
+import net.nyrheim.bricksandmortar.database.jooq.tables.records.NodeRecord;
 
+import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
@@ -23,23 +31,45 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<DropTableRecord, Integer> IDENTITY_DROP_TABLE = Identities0.IDENTITY_DROP_TABLE;
+    public static final Identity<DropTableItemRecord, Integer> IDENTITY_DROP_TABLE_ITEM = Identities0.IDENTITY_DROP_TABLE_ITEM;
+    public static final Identity<NodeRecord, Integer> IDENTITY_NODE = Identities0.IDENTITY_NODE;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<CharacterProfessionRecord> KEY_CHARACTER_PROFESSION_PRIMARY = UniqueKeys0.KEY_CHARACTER_PROFESSION_PRIMARY;
+    public static final UniqueKey<DropTableRecord> KEY_DROP_TABLE_PRIMARY = UniqueKeys0.KEY_DROP_TABLE_PRIMARY;
+    public static final UniqueKey<DropTableItemRecord> KEY_DROP_TABLE_ITEM_PRIMARY = UniqueKeys0.KEY_DROP_TABLE_ITEM_PRIMARY;
+    public static final UniqueKey<NodeRecord> KEY_NODE_PRIMARY = UniqueKeys0.KEY_NODE_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<DropTableItemRecord, DropTableRecord> DROP_TABLE_ITEM_DROP_TABLE_ID_FK = ForeignKeys0.DROP_TABLE_ITEM_DROP_TABLE_ID_FK;
+    public static final ForeignKey<NodeRecord, DropTableRecord> NODE_DROP_TABLE_ID_FK = ForeignKeys0.NODE_DROP_TABLE_ID_FK;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
+    private static class Identities0 {
+        public static Identity<DropTableRecord, Integer> IDENTITY_DROP_TABLE = Internal.createIdentity(DropTable.DROP_TABLE, DropTable.DROP_TABLE.ID);
+        public static Identity<DropTableItemRecord, Integer> IDENTITY_DROP_TABLE_ITEM = Internal.createIdentity(DropTableItem.DROP_TABLE_ITEM, DropTableItem.DROP_TABLE_ITEM.ID);
+        public static Identity<NodeRecord, Integer> IDENTITY_NODE = Internal.createIdentity(Node.NODE, Node.NODE.ID);
+    }
+
     private static class UniqueKeys0 {
         public static final UniqueKey<CharacterProfessionRecord> KEY_CHARACTER_PROFESSION_PRIMARY = Internal.createUniqueKey(CharacterProfession.CHARACTER_PROFESSION, "KEY_character_profession_PRIMARY", new TableField[] { CharacterProfession.CHARACTER_PROFESSION.CHARACTER_ID }, true);
+        public static final UniqueKey<DropTableRecord> KEY_DROP_TABLE_PRIMARY = Internal.createUniqueKey(DropTable.DROP_TABLE, "KEY_drop_table_PRIMARY", new TableField[] { DropTable.DROP_TABLE.ID }, true);
+        public static final UniqueKey<DropTableItemRecord> KEY_DROP_TABLE_ITEM_PRIMARY = Internal.createUniqueKey(DropTableItem.DROP_TABLE_ITEM, "KEY_drop_table_item_PRIMARY", new TableField[] { DropTableItem.DROP_TABLE_ITEM.ID }, true);
+        public static final UniqueKey<NodeRecord> KEY_NODE_PRIMARY = Internal.createUniqueKey(Node.NODE, "KEY_node_PRIMARY", new TableField[] { Node.NODE.ID }, true);
+    }
+
+    private static class ForeignKeys0 {
+        public static final ForeignKey<DropTableItemRecord, DropTableRecord> DROP_TABLE_ITEM_DROP_TABLE_ID_FK = Internal.createForeignKey(Keys.KEY_DROP_TABLE_PRIMARY, DropTableItem.DROP_TABLE_ITEM, "drop_table_item_drop_table_id_fk", new TableField[] { DropTableItem.DROP_TABLE_ITEM.DROP_TABLE_ID }, true);
+        public static final ForeignKey<NodeRecord, DropTableRecord> NODE_DROP_TABLE_ID_FK = Internal.createForeignKey(Keys.KEY_DROP_TABLE_PRIMARY, Node.NODE, "node_drop_table_id_fk", new TableField[] { Node.NODE.DROP_TABLE_ID }, true);
     }
 }
