@@ -19,7 +19,7 @@ import static org.bukkit.ChatColor.RED;
 import static org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK;
 import static org.bukkit.inventory.EquipmentSlot.HAND;
 
-public class NodePlayerInteractListener implements Listener {
+public final class NodePlayerInteractListener implements Listener {
 
     private final BricksAndMortar plugin;
 
