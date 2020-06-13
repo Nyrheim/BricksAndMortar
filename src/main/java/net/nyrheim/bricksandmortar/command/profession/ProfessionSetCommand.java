@@ -5,12 +5,14 @@ import net.nyrheim.bricksandmortar.profession.BricksProfessionService;
 import net.nyrheim.bricksandmortar.profession.Profession;
 import net.nyrheim.penandpaper.character.PenCharacter;
 import net.nyrheim.penandpaper.character.PenCharacterService;
+import net.nyrheim.penandpaper.item.PenItemStack;
 import net.nyrheim.penandpaper.player.PenPlayer;
 import net.nyrheim.penandpaper.player.PenPlayerService;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import static org.bukkit.ChatColor.GREEN;
@@ -55,6 +57,13 @@ public final class ProfessionSetCommand implements CommandExecutor {
             return true;
         }
         professionService.setProfession(character, profession);
+        player.getInventory().addItem(
+                profession.getToolTypes().stream()
+                        .map(toolType -> new PenItemStack(toolType, 1).toItemStack())
+                        .toArray(ItemStack[]::new)
+        )
+                .values()
+                .forEach(item -> player.getWorld().dropItem(player.getLocation(), item));
         sender.sendMessage(GREEN + "Profession set to " + profession.getName() + ".");
         return true;
     }

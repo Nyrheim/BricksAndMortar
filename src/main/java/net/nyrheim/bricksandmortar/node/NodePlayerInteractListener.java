@@ -62,7 +62,7 @@ public final class NodePlayerInteractListener implements Listener {
             event.getPlayer().sendMessage(RED + "You must set your profession before interacting with nodes.");
             return;
         }
-        if (!profession.getTools().contains(tool.getType())) {
+        if (!profession.getToolTypes().contains(tool.getType())) {
             event.getPlayer().sendMessage(RED + "You do not know how to use those tools.");
             return;
         }

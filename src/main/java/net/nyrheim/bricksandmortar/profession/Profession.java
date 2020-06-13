@@ -8,19 +8,19 @@ import java.util.List;
 public abstract class Profession {
 
     private final String name;
-    private final List<ItemType> tools = new ArrayList<>();
+    private final List<ItemType> toolTypes = new ArrayList<>();
 
-    public Profession(String name, List<ItemType> tools) {
+    public Profession(String name, List<ItemType> toolTypes) {
         this.name = name;
-        this.tools.addAll(tools);
+        this.toolTypes.addAll(toolTypes);
     }
 
     public String getName() {
         return name;
     }
 
-    public List<ItemType> getTools() {
-        return tools;
+    public List<ItemType> getToolTypes() {
+        return toolTypes;
     }
 
 }
