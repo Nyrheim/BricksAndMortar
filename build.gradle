@@ -1,6 +1,7 @@
 plugins {
     id "java"
     id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "maven-publish"
 }
 
 group "net.nyrheim"
@@ -110,3 +111,20 @@ shadowJar {
 
 tasks.build.dependsOn tasks.shadowJar
 
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Nyrheim/BricksAndMortar")
+            credentials {
+                username = githubUsername
+                password = githubToken
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
