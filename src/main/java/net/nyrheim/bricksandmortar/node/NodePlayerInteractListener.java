@@ -1,6 +1,8 @@
 package net.nyrheim.bricksandmortar.node;
 
 import net.nyrheim.bricksandmortar.BricksAndMortar;
+import net.nyrheim.bricksandmortar.profession.BricksProfessionService;
+import net.nyrheim.bricksandmortar.profession.Profession;
 import net.nyrheim.penandpaper.character.PenCharacter;
 import net.nyrheim.penandpaper.character.PenCharacterService;
 import net.nyrheim.penandpaper.item.PenItemStack;
@@ -54,6 +56,16 @@ public final class NodePlayerInteractListener implements Listener {
         Node node = nodes.get(0);
         PenItemStack tool = PenItemStack.fromItemStack(event.getPlayer().getInventory().getItemInMainHand());
         if (tool == null) return;
+        BricksProfessionService professionService = plugin.getServices().get(BricksProfessionService.class);
+        Profession profession = professionService.getProfession(character);
+        if (profession == null) {
+            event.getPlayer().sendMessage(RED + "You must set your profession before interacting with nodes.");
+            return;
+        }
+        if (!profession.getTools().contains(tool.getType())) {
+            event.getPlayer().sendMessage(RED + "You do not know how to use those tools.");
+            return;
+        }
         if (character.getExhaustion() >= 100) {
             event.getPlayer().sendMessage(RED + "You are too exhausted to do that!");
             return;
