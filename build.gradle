@@ -4,7 +4,7 @@ plugins {
 }
 
 group "net.nyrheim"
-version "0.1.0-SNAPSHOT"
+version "0.1.0"
 
 def githubUsername = ""
 def githubToken = ""
