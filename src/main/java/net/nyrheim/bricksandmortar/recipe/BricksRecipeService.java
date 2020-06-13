@@ -1158,7 +1158,7 @@ public final class BricksRecipeService {
                 30
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1171,7 +1171,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1184,7 +1184,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1198,7 +1198,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1212,7 +1212,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1226,7 +1226,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1240,7 +1240,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1253,7 +1253,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1266,7 +1266,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1280,7 +1280,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1296,7 +1296,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1311,7 +1311,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1324,7 +1324,7 @@ public final class BricksRecipeService {
                 5
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1337,7 +1337,7 @@ public final class BricksRecipeService {
                 20
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1350,7 +1350,7 @@ public final class BricksRecipeService {
                 15
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1364,7 +1364,7 @@ public final class BricksRecipeService {
                 10
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
@@ -1380,7 +1380,7 @@ public final class BricksRecipeService {
                 10
         ));
         recipes.add(new BricksRecipe(
-                Material.FURNACE,
+                Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
                 CHEFS_TOOLS,
