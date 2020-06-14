@@ -59,6 +59,7 @@ public final class DropTableAddItemCommand implements CommandExecutor {
         }
         if (!(sender instanceof Conversable)) {
             sender.sendMessage(RED + "You cannot be conversed with (??)");
+            return true;
         }
         Conversable conversable = (Conversable) sender;
         Conversation conversation = conversationFactory.buildConversation(conversable);
