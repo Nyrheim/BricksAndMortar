@@ -7,7 +7,6 @@ import net.nyrheim.bricksandmortar.profession.BricksProfessionService;
 import net.nyrheim.penandpaper.item.ItemType;
 import net.nyrheim.penandpaper.item.PenItemStack;
 import net.nyrheim.penandpaper.item.adventuringgear.AdventuringGearType;
-import net.nyrheim.penandpaper.item.armor.ArmorType;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import java.util.List;
 
 import static java.util.Collections.emptyList;
 import static java.util.logging.Level.SEVERE;
-import static net.nyrheim.penandpaper.item.adventuringgear.AdventuringGearType.HIDE;
 import static net.nyrheim.penandpaper.item.adventuringgear.AdventuringGearType.*;
 import static net.nyrheim.penandpaper.item.armor.ArmorType.*;
 import static net.nyrheim.penandpaper.item.weapon.WeaponType.*;
@@ -521,7 +519,7 @@ public final class BricksRecipeService {
                 1,
                 SMITHS_TOOLS,
                 emptyList(),
-                new PenItemStack(PLATE, 1),
+                new PenItemStack(PLATE_MAIL, 1),
                 new HashMap<ItemType, Integer>() {{
                     put(ARMOR_PLATE, 36);
                     put(LEATHER_STRAP, 10);
@@ -2073,9 +2071,9 @@ public final class BricksRecipeService {
                 1,
                 LEATHERWORKERS_TOOLS,
                 emptyList(),
-                new PenItemStack(PADDED, 1),
+                new PenItemStack(PADDED_ARMOR, 1),
                 new HashMap<ItemType, Integer>() {{
-                    put(ArmorType.LEATHER, 1);
+                    put(LEATHER_ARMOR, 1);
                     put(LEATHER_STRAP, 1);
                     put(WOOL, 1);
                     put(STRING, 6);
@@ -2089,7 +2087,7 @@ public final class BricksRecipeService {
                 1,
                 LEATHERWORKERS_TOOLS,
                 emptyList(),
-                new PenItemStack(ArmorType.LEATHER, 1),
+                new PenItemStack(LEATHER_ARMOR, 1),
                 new HashMap<ItemType, Integer>() {{
                     put(AdventuringGearType.LEATHER, 1);
                     put(LEATHER_STRAP, 1);
@@ -2103,9 +2101,9 @@ public final class BricksRecipeService {
                 1,
                 LEATHERWORKERS_TOOLS,
                 emptyList(),
-                new PenItemStack(STUDDED_LEATHER, 1),
+                new PenItemStack(STUDDED_LEATHER_ARMOR, 1),
                 new HashMap<ItemType, Integer>() {{
-                    put(ArmorType.LEATHER, 1);
+                    put(LEATHER_ARMOR, 1);
                     put(LEATHER_STRAP, 1);
                     put(NAILS, 1);
                 }},
@@ -2120,7 +2118,7 @@ public final class BricksRecipeService {
                 emptyList(),
                 new PenItemStack(SCALE_MAIL, 1),
                 new HashMap<ItemType, Integer>() {{
-                    put(ArmorType.LEATHER, 1);
+                    put(LEATHER_ARMOR, 1);
                     put(ARMOR_PLATE, 1);
                 }},
                 50,
@@ -2132,7 +2130,7 @@ public final class BricksRecipeService {
                 1,
                 LEATHERWORKERS_TOOLS,
                 emptyList(),
-                new PenItemStack(ArmorType.HIDE, 1),
+                new PenItemStack(HIDE_ARMOR, 1),
                 new HashMap<ItemType, Integer>() {{
                     put(AdventuringGearType.HIDE, 1);
                 }},
@@ -2156,7 +2154,7 @@ public final class BricksRecipeService {
                 1,
                 LEATHERWORKERS_TOOLS,
                 emptyList(),
-                new PenItemStack(SPLINT, 1),
+                new PenItemStack(SPLINT_MAIL, 1),
                 new HashMap<>(),
                 0,
                 0
