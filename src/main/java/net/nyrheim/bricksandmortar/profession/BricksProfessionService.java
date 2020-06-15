@@ -69,4 +69,12 @@ public final class BricksProfessionService {
                         new CharacterProfessionExperience(getProfession(character), experience));
     }
 
+    public int getLevel(PenCharacter character) {
+        return ProfessionExperienceLookupTable.getLevelAtExperience(getExperience(character));
+    }
+
+    public void setLevel(PenCharacter character, int level) {
+        setExperience(character, ProfessionExperienceLookupTable.getExperienceRequiredForLevel(level));
+    }
+
 }

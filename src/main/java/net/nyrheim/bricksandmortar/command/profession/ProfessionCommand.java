@@ -14,10 +14,12 @@ public final class ProfessionCommand implements CommandExecutor {
 
     private final ProfessionSetCommand professionSetCommand;
     private final ProfessionListCommand professionListCommand;
+    private final ProfessionSetLevelCommand professionSetLevelCommand;
 
     public ProfessionCommand(BricksAndMortar plugin) {
         this.professionSetCommand = new ProfessionSetCommand(plugin);
         this.professionListCommand = new ProfessionListCommand(plugin);
+        this.professionSetLevelCommand = new ProfessionSetLevelCommand(plugin);
     }
 
     @Override
@@ -38,11 +40,18 @@ public final class ProfessionCommand implements CommandExecutor {
                             label,
                             Arrays.stream(args).skip(1).toArray(String[]::new)
                     );
+                case "setlevel":
+                    return professionSetLevelCommand.onCommand(
+                            sender,
+                            command,
+                            label,
+                            Arrays.stream(args).skip(1).toArray(String[]::new)
+                    );
                 default:
-                    sender.sendMessage(RED + "Usage: /" + label + " [set|list]");
+                    sender.sendMessage(RED + "Usage: /" + label + " [set|list|setlevel]");
             }
         } else {
-            sender.sendMessage(RED + "Usage: /" + label + " [set|list]");
+            sender.sendMessage(RED + "Usage: /" + label + " [set|list|setlevel]");
         }
         return true;
     }
