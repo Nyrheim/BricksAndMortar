@@ -2167,6 +2167,19 @@ public final class BricksRecipeService {
                 1,
                 SMITHS_TOOLS,
                 emptyList(),
+                new PenItemStack(IRON_INGOT, 1),
+                new HashMap<ItemType, Integer>() {{
+                    put(IRON_ORE, 2);
+                }},
+                5,
+                5
+        ));
+        recipes.add(new BricksRecipe(
+                Material.ANVIL,
+                professionService.getProfession("Blacksmith"),
+                1,
+                SMITHS_TOOLS,
+                emptyList(),
                 new PenItemStack(SMITHS_TOOLS, 1),
                 new HashMap<ItemType, Integer>() {{
                     put(HANDLE, 8);
