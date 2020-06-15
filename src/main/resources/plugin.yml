@@ -16,7 +16,8 @@ commands:
       Profession management command
       /profession set [profession] - Sets your profession
       /profession list - Lists available professions
-    usage: /<command> [set|list]
+      /profession setlevel [player] [level] - Sets a player's profession level
+    usage: /<command> [set|list|setlevel]
     aliases:
     - prof
   node:
@@ -57,4 +58,7 @@ permissions:
     default: op
   bricksandmortar.command.droptable.view:
     description: Allows viewing drop tables
+    default: op
+  bricksandmortar.command.profession.setlevel:
+    description: Allows setting profession levels
     default: op
