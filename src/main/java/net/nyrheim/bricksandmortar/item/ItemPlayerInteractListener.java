@@ -1,6 +1,7 @@
 package net.nyrheim.bricksandmortar.item;
 
 import net.nyrheim.penandpaper.item.PenItemStack;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -14,6 +15,7 @@ public final class ItemPlayerInteractListener implements Listener {
         if (!event.hasItem()) return;
         ItemStack item = event.getItem();
         if (item == null) return;
+        if (InteractItemLookup.isItemInteractSafe(item)) return;
         PenItemStack penItemStack = PenItemStack.fromItemStack(item);
         if (penItemStack == null) return;
         event.setCancelled(true);
