@@ -1,6 +1,7 @@
 package net.nyrheim.bricksandmortar.profession;
 
 import static java.util.Arrays.asList;
+import static net.nyrheim.penandpaper.item.adventuringgear.AdventuringGearType.DIVING_TOOLS;
 import static net.nyrheim.penandpaper.item.adventuringgear.AdventuringGearType.FISHERMANS_TOOLS;
 
 public final class Fisher extends Profession {
@@ -8,7 +9,8 @@ public final class Fisher extends Profession {
         super(
                 "Fisher",
                 asList(
-                        FISHERMANS_TOOLS
+                        FISHERMANS_TOOLS,
+                        DIVING_TOOLS
                 )
         );
     }
