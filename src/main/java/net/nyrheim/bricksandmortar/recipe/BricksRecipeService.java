@@ -898,19 +898,19 @@ public final class BricksRecipeService {
                 15,
                 15
         ));
-        recipes.add(new BricksRecipe(
-                Material.FLETCHING_TABLE,
-                professionService.getProfession("Carpenter"),
-                1,
-                CARPENTERS_TOOLS,
-                emptyList(),
-                new PenItemStack(BLOWGUN, 1),
-                new HashMap<ItemType, Integer>() {{
-
-                }},
-                10,
-                10
-        ));
+//        recipes.add(new BricksRecipe(
+//                Material.FLETCHING_TABLE,
+//                professionService.getProfession("Carpenter"),
+//                1,
+//                CARPENTERS_TOOLS,
+//                emptyList(),
+//                new PenItemStack(BLOWGUN, 1),
+//                new HashMap<ItemType, Integer>() {{
+//
+//                }},
+//                10,
+//                10
+//        ));
         recipes.add(new BricksRecipe(
                 Material.FLETCHING_TABLE,
                 professionService.getProfession("Carpenter"),
@@ -2137,28 +2137,28 @@ public final class BricksRecipeService {
                 30,
                 30
         ));
-        recipes.add(new BricksRecipe(
-                Material.LOOM,
-                professionService.getProfession("Leatherworker"),
-                1,
-                LEATHERWORKERS_TOOLS,
-                emptyList(),
-                new PenItemStack(RING_MAIL, 1),
-                new HashMap<>(),
-                0,
-                0
-        ));
-        recipes.add(new BricksRecipe(
-                Material.LOOM,
-                professionService.getProfession("Leatherworker"),
-                1,
-                LEATHERWORKERS_TOOLS,
-                emptyList(),
-                new PenItemStack(SPLINT_MAIL, 1),
-                new HashMap<>(),
-                0,
-                0
-        ));
+//        recipes.add(new BricksRecipe(
+//                Material.LOOM,
+//                professionService.getProfession("Leatherworker"),
+//                1,
+//                LEATHERWORKERS_TOOLS,
+//                emptyList(),
+//                new PenItemStack(RING_MAIL, 1),
+//                new HashMap<>(),
+//                0,
+//                0
+//        ));
+//        recipes.add(new BricksRecipe(
+//                Material.LOOM,
+//                professionService.getProfession("Leatherworker"),
+//                1,
+//                LEATHERWORKERS_TOOLS,
+//                emptyList(),
+//                new PenItemStack(SPLINT_MAIL, 1),
+//                new HashMap<>(),
+//                0,
+//                0
+//        ));
         recipes.add(new BricksRecipe(
                 Material.ANVIL,
                 professionService.getProfession("Blacksmith"),
@@ -2372,7 +2372,11 @@ public final class BricksRecipeService {
                 CARPENTERS_TOOLS,
                 emptyList(),
                 new PenItemStack(DIVING_TOOLS, 1),
-                new HashMap<>(),
+                new HashMap<ItemType, Integer>() {{
+                    put(HANDLE, 8);
+                    put(BLADE, 8);
+                    put(IRON_INGOT, 4);
+                }},
                 50,
                 50
         ));
