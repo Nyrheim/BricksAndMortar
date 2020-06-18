@@ -92,11 +92,14 @@ public final class RecipeGUI implements InventoryHolder {
         if (slot == 18 && page > 0) {
             page--;
             showCurrentPage();
+            return;
         }
         if (slot == 26 && (page + 1) * 18 <= recipes.size()) {
             page++;
             showCurrentPage();
+            return;
         }
+        if (slot >= 18) return;
         BricksRecipe recipe = recipes.stream().skip((page * 18) + slot).findFirst().orElse(null);
         if (recipe != null) {
             ItemStack itemInHand = player.getInventory().getItemInMainHand();
