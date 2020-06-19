@@ -126,6 +126,7 @@ public final class RecipeGUI implements InventoryHolder {
             if (character == null) return;
             BricksProfessionService professionService = plugin.getServices().get(BricksProfessionService.class);
             if (professionService.getProfession(character) != recipe.getProfession()) return;
+            if (professionService.getLevel(character) < recipe.getMinimumLevel()) return;
             if (PenItemStack.fromItemStack(itemInHand).getType() != recipe.getToolkit()) return;
             ItemStack[] inventoryContents = player.getInventory().getContents();
             PenItemStack[] penContents = Arrays.stream(inventoryContents)
