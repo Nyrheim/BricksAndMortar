@@ -472,7 +472,7 @@ public final class BricksRecipeService {
         recipes.add(new BricksRecipe(
                 Material.ANVIL,
                 professionService.getProfession("Blacksmith"),
-                1,
+                5,
                 SMITHS_TOOLS,
                 emptyList(),
                 new PenItemStack(HALF_PLATE, 1),
@@ -516,7 +516,7 @@ public final class BricksRecipeService {
         recipes.add(new BricksRecipe(
                 Material.ANVIL,
                 professionService.getProfession("Blacksmith"),
-                1,
+                6,
                 SMITHS_TOOLS,
                 emptyList(),
                 new PenItemStack(PLATE_MAIL, 1),
@@ -2098,7 +2098,7 @@ public final class BricksRecipeService {
         recipes.add(new BricksRecipe(
                 Material.LOOM,
                 professionService.getProfession("Leatherworker"),
-                1,
+                3,
                 LEATHERWORKERS_TOOLS,
                 emptyList(),
                 new PenItemStack(STUDDED_LEATHER_ARMOR, 1),
@@ -2151,7 +2151,7 @@ public final class BricksRecipeService {
 //        recipes.add(new BricksRecipe(
 //                Material.LOOM,
 //                professionService.getProfession("Leatherworker"),
-//                1,
+//                4,
 //                LEATHERWORKERS_TOOLS,
 //                emptyList(),
 //                new PenItemStack(SPLINT_MAIL, 1),
