@@ -179,7 +179,7 @@ public final class NodeTable implements Table {
         if (world == null) return null;
         Node node = new Node(
                 new NodeId(result.get(NODE.ID)),
-                result.get(NODE.NAME),
+                name,
                 world,
                 new Location(
                         world,
