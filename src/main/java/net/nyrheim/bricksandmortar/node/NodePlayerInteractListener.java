@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
+import static net.nyrheim.bricksandmortar.node.ExhaustionMilestoneLookupTable.lookupExhaustionMilestone;
 import static org.bukkit.ChatColor.GREEN;
 import static org.bukkit.ChatColor.RED;
 import static org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK;
@@ -76,12 +77,16 @@ public final class NodePlayerInteractListener implements Listener {
         }
         ItemStack dropItemStack = drop.createItemStack();
         if (dropItemStack != null) {
+            String lookupExhaustion = lookupExhaustionMilestone(character.getExhaustion() + plugin.getConfig().getInt("nodes.exhaustion"), character.getExhaustion());
             character.setExhaustion(character.getExhaustion() + plugin.getConfig().getInt("nodes.exhaustion"));
             characterService.updateCharacter(character);
             block.getWorld().dropItemNaturally(block.getRelative(event.getBlockFace()).getLocation(), dropItemStack);
             event.getPlayer().sendMessage(GREEN + "You got: " + drop.getAmount() + " \u00d7 " +
                     (drop.getQuality() != null ? drop.getQuality().getName() + " " : "")
                     + drop.getItemType().getName());
+            if (lookupExhaustion != null) {
+                event.getPlayer().sendMessage(lookupExhaustion);
+            }
         }
     }
 
