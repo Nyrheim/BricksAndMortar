@@ -24,6 +24,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static net.nyrheim.bricksandmortar.exhaustion.ExhaustionFoodModifierLookupTable.lookupExhaustionFoodModifierCrafter;
+import static net.nyrheim.bricksandmortar.exhaustion.ExhaustionFoodModifierLookupTable.lookupExhaustionFoodModifierGatherer;
+import static net.nyrheim.bricksandmortar.exhaustion.HungerModify.updateHunger;
 import static org.bukkit.ChatColor.WHITE;
 import static org.bukkit.Material.AIR;
 import static org.bukkit.Sound.BLOCK_ANVIL_USE;
@@ -167,7 +170,11 @@ public final class RecipeGUI implements InventoryHolder {
             player.getInventory().addItem(recipe.getResult().toItemStack())
                     .values()
                     .forEach(item -> player.getWorld().dropItem(player.getLocation(), item));
-            character.setExhaustion(character.getExhaustion() + recipe.getExhaustion());
+            int baseExh = character.getExhaustion() + recipe.getExhaustion();
+            int foodMultiplier = lookupExhaustionFoodModifierCrafter(player);
+            int calcExh = baseExh + foodMultiplier;
+            character.setExhaustion(calcExh);
+            updateHunger(player, recipe.getExhaustion());
             characterService.updateCharacter(character);
             professionService.setExperience(character, professionService.getExperience(character) + recipe.getExperience());
             player.playSound(player.getLocation(), BLOCK_ANVIL_USE, 1f, 1f);

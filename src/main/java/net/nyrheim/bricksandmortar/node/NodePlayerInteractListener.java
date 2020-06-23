@@ -10,7 +10,6 @@ import net.nyrheim.penandpaper.item.PenItemStack;
 import net.nyrheim.penandpaper.player.PenPlayer;
 import net.nyrheim.penandpaper.player.PenPlayerService;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -81,10 +80,11 @@ public final class NodePlayerInteractListener implements Listener {
         ItemStack dropItemStack = drop.createItemStack();
         if (dropItemStack != null) {
             int baseExh = character.getExhaustion() + plugin.getConfig().getInt("nodes.exhaustion");
-            int foodMultiplier = lookupExhaustionFoodModifierGatherer(event.getPlayer(), baseExh);
+            int foodMultiplier = lookupExhaustionFoodModifierGatherer(event.getPlayer());
             int calcExh = baseExh + foodMultiplier;
             String lookupExhaustion = lookupExhaustionMilestone(calcExh, character.getExhaustion());
             character.setExhaustion(calcExh);
+            HungerModify.updateHunger(event.getPlayer());
             characterService.updateCharacter(character);
             block.getWorld().dropItemNaturally(block.getRelative(event.getBlockFace()).getLocation(), dropItemStack);
             event.getPlayer().sendMessage(GREEN + "You got: " + drop.getAmount() + " \u00d7 " +
@@ -93,7 +93,6 @@ public final class NodePlayerInteractListener implements Listener {
             if (lookupExhaustion != null) {
                 event.getPlayer().sendMessage(lookupExhaustion);
             }
-            HungerModify.updateHunger(event.getPlayer());
         }
     }
 
