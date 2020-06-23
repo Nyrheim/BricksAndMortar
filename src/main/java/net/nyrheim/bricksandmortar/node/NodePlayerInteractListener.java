@@ -1,6 +1,7 @@
 package net.nyrheim.bricksandmortar.node;
 
 import net.nyrheim.bricksandmortar.BricksAndMortar;
+import net.nyrheim.bricksandmortar.exhaustion.HungerModify;
 import net.nyrheim.bricksandmortar.profession.BricksProfessionService;
 import net.nyrheim.bricksandmortar.profession.Profession;
 import net.nyrheim.penandpaper.character.PenCharacter;
@@ -9,6 +10,7 @@ import net.nyrheim.penandpaper.item.PenItemStack;
 import net.nyrheim.penandpaper.player.PenPlayer;
 import net.nyrheim.penandpaper.player.PenPlayerService;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -17,7 +19,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-import static net.nyrheim.bricksandmortar.node.ExhaustionMilestoneLookupTable.lookupExhaustionMilestone;
+import static net.nyrheim.bricksandmortar.exhaustion.ExhaustionFoodModifierLookupTable.lookupExhaustionFoodModifierGatherer;
+import static net.nyrheim.bricksandmortar.exhaustion.ExhaustionMilestoneLookupTable.lookupExhaustionMilestone;
 import static org.bukkit.ChatColor.GREEN;
 import static org.bukkit.ChatColor.RED;
 import static org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK;
@@ -77,8 +80,11 @@ public final class NodePlayerInteractListener implements Listener {
         }
         ItemStack dropItemStack = drop.createItemStack();
         if (dropItemStack != null) {
-            String lookupExhaustion = lookupExhaustionMilestone(character.getExhaustion() + plugin.getConfig().getInt("nodes.exhaustion"), character.getExhaustion());
-            character.setExhaustion(character.getExhaustion() + plugin.getConfig().getInt("nodes.exhaustion"));
+            int baseExh = character.getExhaustion() + plugin.getConfig().getInt("nodes.exhaustion");
+            int foodMultiplier = lookupExhaustionFoodModifierGatherer(event.getPlayer(), baseExh);
+            int calcExh = baseExh + foodMultiplier;
+            String lookupExhaustion = lookupExhaustionMilestone(calcExh, character.getExhaustion());
+            character.setExhaustion(calcExh);
             characterService.updateCharacter(character);
             block.getWorld().dropItemNaturally(block.getRelative(event.getBlockFace()).getLocation(), dropItemStack);
             event.getPlayer().sendMessage(GREEN + "You got: " + drop.getAmount() + " \u00d7 " +
@@ -87,6 +93,7 @@ public final class NodePlayerInteractListener implements Listener {
             if (lookupExhaustion != null) {
                 event.getPlayer().sendMessage(lookupExhaustion);
             }
+            HungerModify.updateHunger(event.getPlayer());
         }
     }
 

@@ -1,4 +1,4 @@
-package net.nyrheim.bricksandmortar.node;
+package net.nyrheim.bricksandmortar.exhaustion;
 
 import static org.bukkit.ChatColor.*;
 
