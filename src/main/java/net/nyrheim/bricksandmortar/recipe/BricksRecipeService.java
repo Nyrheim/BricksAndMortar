@@ -898,19 +898,19 @@ public final class BricksRecipeService {
                 15,
                 15
         ));
-//        recipes.add(new BricksRecipe(
-//                Material.FLETCHING_TABLE,
-//                professionService.getProfession("Carpenter"),
-//                1,
-//                CARPENTERS_TOOLS,
-//                emptyList(),
-//                new PenItemStack(BLOWGUN, 1),
-//                new HashMap<ItemType, Integer>() {{
-//
-//                }},
-//                10,
-//                10
-//        ));
+        recipes.add(new BricksRecipe(
+                Material.FLETCHING_TABLE,
+                professionService.getProfession("Carpenter"),
+                1,
+                CARPENTERS_TOOLS,
+                emptyList(),
+                new PenItemStack(BLOWGUN, 1),
+                new HashMap<ItemType, Integer>() {{
+                    put(HANDLE, 2);
+                }},
+                10,
+                10
+        ));
         recipes.add(new BricksRecipe(
                 Material.FLETCHING_TABLE,
                 professionService.getProfession("Carpenter"),
