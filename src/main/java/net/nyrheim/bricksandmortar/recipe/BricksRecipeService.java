@@ -2151,17 +2151,20 @@ public final class BricksRecipeService {
                 40,
                 40
         ));
-//        recipes.add(new BricksRecipe(
-//                Material.LOOM,
-//                professionService.getProfession("Leatherworker"),
-//                4,
-//                LEATHERWORKERS_TOOLS,
-//                emptyList(),
-//                new PenItemStack(SPLINT_MAIL, 1),
-//                new HashMap<>(),
-//                0,
-//                0
-//        ));
+        recipes.add(new BricksRecipe(
+                Material.LOOM,
+                professionService.getProfession("Leatherworker"),
+                4,
+                LEATHERWORKERS_TOOLS,
+                emptyList(),
+                new PenItemStack(SPLINT_MAIL, 1),
+                new HashMap<ItemType, Integer>() {{
+                    put(LEATHER_ARMOR, 1);
+                    put(CHAIN_RINGS, 24);
+                }},
+                55,
+                60
+        ));
         recipes.add(new BricksRecipe(
                 Material.ANVIL,
                 professionService.getProfession("Blacksmith"),
