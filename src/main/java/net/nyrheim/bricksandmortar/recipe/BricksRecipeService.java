@@ -765,7 +765,7 @@ public final class BricksRecipeService {
                 1,
                 SMITHS_TOOLS,
                 emptyList(),
-                new PenItemStack(NAILS, 1),
+                new PenItemStack(NAILS, 5),
                 new HashMap<ItemType, Integer>() {{
                     put(IRON_INGOT, 1);
                     put(FLUX, 1);
