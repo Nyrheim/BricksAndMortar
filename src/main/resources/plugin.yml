@@ -62,3 +62,9 @@ permissions:
   bricksandmortar.command.profession.setlevel:
     description: Allows setting profession levels
     default: op
+  bricksandmortar.command.profession:
+    description: Allows viewing profession levels
+    default: op
+  bricksandmortar.command.profession.other:
+    description: Allows viewing another character's profession level
+    default: op
