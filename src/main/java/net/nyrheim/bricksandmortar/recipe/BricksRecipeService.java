@@ -1317,6 +1317,7 @@ public final class BricksRecipeService {
                 new PenItemStack(ALE, 1),
                 new HashMap<ItemType, Integer>() {{
                     put(REEDGRAIN, 1);
+                    put(GLASS_BOTTLE, 1);
                 }},
                 5,
                 5
@@ -1330,6 +1331,7 @@ public final class BricksRecipeService {
                 new PenItemStack(LIQUOR, 1),
                 new HashMap<ItemType, Integer>() {{
                     put(REEDGRAIN, 10);
+                    put(GLASS_BOTTLE, 1);
                 }},
                 20,
                 20
@@ -1343,6 +1345,7 @@ public final class BricksRecipeService {
                 new PenItemStack(WINE, 1),
                 new HashMap<ItemType, Integer>() {{
                     put(SPRINGBERRIES, 1);
+                    put(GLASS_BOTTLE, 1);
                 }},
                 15,
                 15
