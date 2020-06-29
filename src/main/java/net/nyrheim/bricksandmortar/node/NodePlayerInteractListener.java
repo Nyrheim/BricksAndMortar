@@ -1,15 +1,16 @@
 package net.nyrheim.bricksandmortar.node;
 
 import net.nyrheim.bricksandmortar.BricksAndMortar;
-import net.nyrheim.bricksandmortar.exhaustion.HungerModify;
 import net.nyrheim.bricksandmortar.profession.BricksProfessionService;
 import net.nyrheim.bricksandmortar.profession.Profession;
 import net.nyrheim.penandpaper.character.PenCharacter;
 import net.nyrheim.penandpaper.character.PenCharacterService;
+import net.nyrheim.penandpaper.exhaustion.ExhaustionTier;
 import net.nyrheim.penandpaper.item.PenItemStack;
 import net.nyrheim.penandpaper.player.PenPlayer;
 import net.nyrheim.penandpaper.player.PenPlayerService;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -18,10 +19,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-import static net.nyrheim.bricksandmortar.exhaustion.ExhaustionFoodModifierLookupTable.lookupExhaustionFoodModifierGatherer;
-import static net.nyrheim.bricksandmortar.exhaustion.ExhaustionMilestoneLookupTable.lookupExhaustionMilestone;
-import static org.bukkit.ChatColor.GREEN;
-import static org.bukkit.ChatColor.RED;
+import static java.lang.Math.min;
+import static org.bukkit.ChatColor.*;
 import static org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK;
 import static org.bukkit.inventory.EquipmentSlot.HAND;
 
@@ -79,21 +78,50 @@ public final class NodePlayerInteractListener implements Listener {
         }
         ItemStack dropItemStack = drop.createItemStack();
         if (dropItemStack != null) {
-            int baseExh = character.getExhaustion() + plugin.getConfig().getInt("nodes.exhaustion");
-            int foodMultiplier = lookupExhaustionFoodModifierGatherer(event.getPlayer());
-            int calcExh = baseExh + foodMultiplier;
-            String lookupExhaustion = lookupExhaustionMilestone(calcExh, character.getExhaustion());
-            character.setExhaustion(calcExh);
-            HungerModify.updateHunger(event.getPlayer());
-            characterService.updateCharacter(character);
+            Player player = event.getPlayer();
+            updateExhaustion(characterService, character, player);
+            updateHunger(player);
             block.getWorld().dropItemNaturally(block.getRelative(event.getBlockFace()).getLocation(), dropItemStack);
-            event.getPlayer().sendMessage(GREEN + "You got: " + drop.getAmount() + " \u00d7 " +
+            player.sendMessage(GREEN + "You got: " + drop.getAmount() + " \u00d7 " +
                     (drop.getQuality() != null ? drop.getQuality().getName() + " " : "")
                     + drop.getItemType().getName());
-            if (lookupExhaustion != null) {
-                event.getPlayer().sendMessage(lookupExhaustion);
-            }
         }
+    }
+
+    private void updateExhaustion(PenCharacterService characterService, PenCharacter character, Player player) {
+        int oldExhaustion = character.getExhaustion();
+        int newExhaustion = min(character.getExhaustion() + plugin.getConfig().getInt("nodes.exhaustion") + getExhaustionFoodModifier(player), 100);
+        character.setExhaustion(newExhaustion);
+        characterService.updateCharacter(character);
+        ExhaustionTier oldExhaustionTier = ExhaustionTier.forExhaustionValue(oldExhaustion);
+        ExhaustionTier newExhaustionTier = ExhaustionTier.forExhaustionValue(newExhaustion);
+        if (oldExhaustionTier != newExhaustionTier) {
+            player.sendMessage(newExhaustionTier.getMessageSelf());
+        }
+    }
+
+    private void updateHunger(Player player) {
+        int foodLevel = player.getFoodLevel();
+        if (foodLevel > 15) {
+            player.setFoodLevel(foodLevel - 2);
+        } else {
+            player.setFoodLevel(foodLevel - 1);
+        }
+    }
+
+    private int getExhaustionFoodModifier(Player player) {
+        return getExhaustionFoodModifier(player.getFoodLevel());
+    }
+
+    private int getExhaustionFoodModifier(int foodLevel) {
+        if (foodLevel >= 17) return -2;
+        if (foodLevel >= 11) return -1;
+        if (foodLevel >= 10) return 0;
+        if (foodLevel >= 8) return 1;
+        if (foodLevel >= 6) return 2;
+        if (foodLevel >= 4) return 3;
+        if (foodLevel >= 2) return 4;
+        return 5;
     }
 
 }

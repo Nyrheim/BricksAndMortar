@@ -8,6 +8,7 @@ import net.nyrheim.bricksandmortar.profession.BricksProfessionService;
 import net.nyrheim.bricksandmortar.recipe.BricksRecipe;
 import net.nyrheim.penandpaper.character.PenCharacter;
 import net.nyrheim.penandpaper.character.PenCharacterService;
+import net.nyrheim.penandpaper.exhaustion.ExhaustionTier;
 import net.nyrheim.penandpaper.item.ItemType;
 import net.nyrheim.penandpaper.item.PenItemStack;
 import net.nyrheim.penandpaper.player.PenPlayer;
@@ -24,9 +25,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static net.nyrheim.bricksandmortar.exhaustion.ExhaustionFoodModifierLookupTable.lookupExhaustionFoodModifierCrafter;
-import static net.nyrheim.bricksandmortar.exhaustion.ExhaustionFoodModifierLookupTable.lookupExhaustionFoodModifierGatherer;
-import static net.nyrheim.bricksandmortar.exhaustion.HungerModify.updateHunger;
+import static java.lang.Math.min;
+import static java.lang.Math.round;
 import static org.bukkit.ChatColor.WHITE;
 import static org.bukkit.Material.AIR;
 import static org.bukkit.Sound.BLOCK_ANVIL_USE;
@@ -170,15 +170,23 @@ public final class RecipeGUI implements InventoryHolder {
             player.getInventory().addItem(recipe.getResult().toItemStack())
                     .values()
                     .forEach(item -> player.getWorld().dropItem(player.getLocation(), item));
-            int baseExh = character.getExhaustion() + recipe.getExhaustion();
-            int foodMultiplier = lookupExhaustionFoodModifierCrafter(player);
-            int calcExh = baseExh + foodMultiplier;
-            character.setExhaustion(calcExh);
+            updateExhaustion(player, recipe, characterService, character);
             updateHunger(player, recipe.getExhaustion());
-            characterService.updateCharacter(character);
             professionService.setExperience(character, professionService.getExperience(character) + recipe.getExperience());
             player.playSound(player.getLocation(), BLOCK_ANVIL_USE, 1f, 1f);
             player.closeInventory();
+        }
+    }
+
+    private void updateExhaustion(Player player, BricksRecipe recipe, PenCharacterService characterService, PenCharacter character) {
+        int oldExhaustion = character.getExhaustion();
+        int newExhaustion = min(character.getExhaustion() + recipe.getExhaustion() + getFoodExhaustionModifier(player), 100);
+        character.setExhaustion(newExhaustion);
+        characterService.updateCharacter(character);
+        ExhaustionTier oldExhaustionTier = ExhaustionTier.forExhaustionValue(oldExhaustion);
+        ExhaustionTier newExhaustionTier = ExhaustionTier.forExhaustionValue(newExhaustion);
+        if (oldExhaustionTier != newExhaustionTier) {
+            player.sendMessage(newExhaustionTier.getMessageSelf());
         }
     }
 
@@ -190,6 +198,31 @@ public final class RecipeGUI implements InventoryHolder {
 
     public void openInventory(Player player) {
         player.openInventory(getInventory());
+    }
+
+    private void updateHunger(Player player, int exhaustion) {
+        int foodLevel = player.getFoodLevel();
+        double exhMod = round(exhaustion / 8.0);
+        if (foodLevel > 15) {
+            player.setFoodLevel(foodLevel - (2 + (int) exhMod));
+        } else {
+            player.setFoodLevel(foodLevel - (1 + (int) exhMod));
+        }
+    }
+
+    private int getFoodExhaustionModifier(Player player) {
+        return getFoodExhaustionModifier(player.getFoodLevel());
+    }
+
+    private int getFoodExhaustionModifier(int foodLevel) {
+        if (foodLevel >= 17) return -2;
+        if (foodLevel >= 11) return -1;
+        if (foodLevel >= 10) return 0;
+        if (foodLevel >= 8) return 3;
+        if (foodLevel >= 6) return 6;
+        if (foodLevel >= 4) return 8;
+        if (foodLevel >= 2) return 12;
+        return 15;
     }
 
 }
