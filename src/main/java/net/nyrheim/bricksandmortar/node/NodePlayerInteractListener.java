@@ -80,7 +80,7 @@ public final class NodePlayerInteractListener implements Listener {
         if (dropItemStack != null) {
             Player player = event.getPlayer();
             updateExhaustion(characterService, character, player);
-            updateHunger(player);
+            player.setFoodLevel(player.getFoodLevel() - 1);
             block.getWorld().dropItemNaturally(block.getRelative(event.getBlockFace()).getLocation(), dropItemStack);
             player.sendMessage(GREEN + "You got: " + drop.getAmount() + " \u00d7 " +
                     (drop.getQuality() != null ? drop.getQuality().getName() + " " : "")
@@ -97,15 +97,6 @@ public final class NodePlayerInteractListener implements Listener {
         ExhaustionTier newExhaustionTier = ExhaustionTier.forExhaustionValue(newExhaustion);
         if (oldExhaustionTier != newExhaustionTier) {
             player.sendMessage(newExhaustionTier.getMessageSelf());
-        }
-    }
-
-    private void updateHunger(Player player) {
-        int foodLevel = player.getFoodLevel();
-        if (foodLevel > 15) {
-            player.setFoodLevel(foodLevel - 2);
-        } else {
-            player.setFoodLevel(foodLevel - 1);
         }
     }
 

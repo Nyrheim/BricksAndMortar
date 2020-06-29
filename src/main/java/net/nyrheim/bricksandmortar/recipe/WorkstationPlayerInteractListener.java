@@ -68,10 +68,13 @@ public final class WorkstationPlayerInteractListener implements Listener {
                         PenCharacterService characterService = plugin.getServices().get(PenCharacterService.class);
                         PenCharacter character = characterService.getActiveCharacter(penPlayer);
                         if (character == null) return false;
+                        if (character.getExhaustion() + potentialRecipe.getExhaustion() > 100) return false;
                         BricksProfessionService professionService = plugin.getServices().get(BricksProfessionService.class);
                         if (professionService.getProfession(character) != potentialRecipe.getProfession()) return false;
                         if (professionService.getLevel(character) < potentialRecipe.getMinimumLevel()) return false;
-                        if (PenItemStack.fromItemStack(itemInHand).getType() != potentialRecipe.getToolkit()) return false;
+                        PenItemStack penItemInHand = PenItemStack.fromItemStack(itemInHand);
+                        if (penItemInHand == null) return false;
+                        if (penItemInHand.getType() != potentialRecipe.getToolkit()) return false;
                         ItemStack[] inventoryContents = event.getPlayer().getInventory().getContents();
                         PenItemStack[] penContents = Arrays.stream(inventoryContents)
                                 .map(item -> item == null ? null : PenItemStack.fromItemStack(item))
