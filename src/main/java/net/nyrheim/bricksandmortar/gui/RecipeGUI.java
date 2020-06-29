@@ -26,7 +26,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.min;
-import static java.lang.Math.round;
 import static org.bukkit.ChatColor.WHITE;
 import static org.bukkit.Material.AIR;
 import static org.bukkit.Sound.BLOCK_ANVIL_USE;
@@ -127,10 +126,13 @@ public final class RecipeGUI implements InventoryHolder {
             PenCharacterService characterService = plugin.getServices().get(PenCharacterService.class);
             PenCharacter character = characterService.getActiveCharacter(penPlayer);
             if (character == null) return;
+            if (character.getExhaustion() + recipe.getExhaustion() > 100) return;
             BricksProfessionService professionService = plugin.getServices().get(BricksProfessionService.class);
             if (professionService.getProfession(character) != recipe.getProfession()) return;
             if (professionService.getLevel(character) < recipe.getMinimumLevel()) return;
-            if (PenItemStack.fromItemStack(itemInHand).getType() != recipe.getToolkit()) return;
+            PenItemStack penItemInHand = PenItemStack.fromItemStack(itemInHand);
+            if (penItemInHand == null) return;
+            if (penItemInHand.getType() != recipe.getToolkit()) return;
             ItemStack[] inventoryContents = player.getInventory().getContents();
             PenItemStack[] penContents = Arrays.stream(inventoryContents)
                     .map(item -> item == null ? null : PenItemStack.fromItemStack(item))
@@ -171,7 +173,7 @@ public final class RecipeGUI implements InventoryHolder {
                     .values()
                     .forEach(item -> player.getWorld().dropItem(player.getLocation(), item));
             updateExhaustion(player, recipe, characterService, character);
-            updateHunger(player, recipe.getExhaustion());
+            player.setFoodLevel(player.getFoodLevel() - 1);
             professionService.setExperience(character, professionService.getExperience(character) + recipe.getExperience());
             player.playSound(player.getLocation(), BLOCK_ANVIL_USE, 1f, 1f);
             player.closeInventory();
@@ -198,16 +200,6 @@ public final class RecipeGUI implements InventoryHolder {
 
     public void openInventory(Player player) {
         player.openInventory(getInventory());
-    }
-
-    private void updateHunger(Player player, int exhaustion) {
-        int foodLevel = player.getFoodLevel();
-        double exhMod = round(exhaustion / 8.0);
-        if (foodLevel > 15) {
-            player.setFoodLevel(foodLevel - (2 + (int) exhMod));
-        } else {
-            player.setFoodLevel(foodLevel - (1 + (int) exhMod));
-        }
     }
 
     private int getFoodExhaustionModifier(Player player) {

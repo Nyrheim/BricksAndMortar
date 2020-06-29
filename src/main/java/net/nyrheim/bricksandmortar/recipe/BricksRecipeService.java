@@ -1188,7 +1188,7 @@ public final class BricksRecipeService {
                 1,
                 CHEFS_TOOLS,
                 emptyList(),
-                new PenItemStack(FLOUR, 1),
+                new PenItemStack(FLOUR, 2),
                 new HashMap<ItemType, Integer>() {{
                     put(REEDGRAIN, 1);
                 }},
@@ -1209,6 +1209,7 @@ public final class BricksRecipeService {
                 5,
                 5
         ));
+
         recipes.add(new BricksRecipe(
                 Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
