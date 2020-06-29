@@ -1156,6 +1156,20 @@ public final class BricksRecipeService {
                 30
         ));
         recipes.add(new BricksRecipe(
+                Material.FLETCHING_TABLE,
+                professionService.getProfession("Carpenter"),
+                1,
+                CARPENTERS_TOOLS,
+                emptyList(),
+                new PenItemStack(ARROW, 4),
+                new HashMap<ItemType, Integer>() {{
+                    put(ARROW_HEAD, 4);
+                    put(ARROW_BODY, 4);
+                }},
+                20,
+                20
+        ));
+        recipes.add(new BricksRecipe(
                 Material.BLAST_FURNACE,
                 professionService.getProfession("Cook"),
                 1,
