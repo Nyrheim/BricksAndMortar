@@ -3,6 +3,7 @@ package net.nyrheim.bricksandmortar.node;
 import net.nyrheim.bricksandmortar.BricksAndMortar;
 import net.nyrheim.bricksandmortar.profession.BricksProfessionService;
 import net.nyrheim.bricksandmortar.profession.Profession;
+import net.nyrheim.bricksandmortar.profession.ProfessionExperienceLookupTable;
 import net.nyrheim.penandpaper.character.PenCharacter;
 import net.nyrheim.penandpaper.character.PenCharacterService;
 import net.nyrheim.penandpaper.exhaustion.ExhaustionTier;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import static java.lang.Math.min;
 import static org.bukkit.ChatColor.*;
+import static org.bukkit.Sound.ENTITY_PLAYER_LEVELUP;
 import static org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK;
 import static org.bukkit.inventory.EquipmentSlot.HAND;
 
@@ -81,6 +83,7 @@ public final class NodePlayerInteractListener implements Listener {
             Player player = event.getPlayer();
             updateExhaustion(characterService, character, player);
             player.setFoodLevel(player.getFoodLevel() - 1);
+            updateExperience(professionService, character, player);
             block.getWorld().dropItemNaturally(block.getRelative(event.getBlockFace()).getLocation(), dropItemStack);
             player.sendMessage(GREEN + "You got: " + drop.getAmount() + " \u00d7 " +
                     (drop.getQuality() != null ? drop.getQuality().getName() + " " : "")
@@ -97,6 +100,18 @@ public final class NodePlayerInteractListener implements Listener {
         ExhaustionTier newExhaustionTier = ExhaustionTier.forExhaustionValue(newExhaustion);
         if (oldExhaustionTier != newExhaustionTier) {
             player.sendMessage(newExhaustionTier.getMessageSelf());
+        }
+    }
+
+    private void updateExperience(BricksProfessionService professionService, PenCharacter character, Player player) {
+        int oldExperience = professionService.getExperience(character);
+        int oldLevel = ProfessionExperienceLookupTable.getLevelAtExperience(oldExperience);
+        int newExperience = oldExperience + plugin.getConfig().getInt("nodes.experience");
+        professionService.setExperience(character, newExperience);
+        int newLevel = ProfessionExperienceLookupTable.getLevelAtExperience(newExperience);
+        if (newLevel > oldLevel) {
+            player.playSound(player.getLocation(), ENTITY_PLAYER_LEVELUP, 1f, 1f);
+            player.sendMessage(YELLOW + "Your extensive work has led to an improvement in your knowledge.");
         }
     }
 

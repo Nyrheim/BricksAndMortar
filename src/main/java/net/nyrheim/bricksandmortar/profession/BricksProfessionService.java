@@ -7,6 +7,8 @@ import net.nyrheim.penandpaper.character.PenCharacter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.min;
+
 public final class BricksProfessionService {
 
     private final BricksAndMortar plugin;
@@ -66,7 +68,8 @@ public final class BricksProfessionService {
         plugin.getDatabase()
                 .getTable(CharacterProfessionTable.class)
                 .insertOrUpdateProfessionExperience(character.getId(),
-                        new CharacterProfessionExperience(getProfession(character), experience));
+                        new CharacterProfessionExperience(getProfession(character),
+                                min(experience, ProfessionExperienceLookupTable.MAX_EXPERIENCE)));
     }
 
     public int getLevel(PenCharacter character) {

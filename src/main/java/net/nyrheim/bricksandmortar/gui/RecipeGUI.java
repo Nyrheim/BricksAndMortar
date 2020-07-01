@@ -5,6 +5,7 @@ import com.rpkit.itemquality.bukkit.itemquality.RPKItemQuality;
 import com.rpkit.itemquality.bukkit.itemquality.RPKItemQualityProvider;
 import net.nyrheim.bricksandmortar.BricksAndMortar;
 import net.nyrheim.bricksandmortar.profession.BricksProfessionService;
+import net.nyrheim.bricksandmortar.profession.ProfessionExperienceLookupTable;
 import net.nyrheim.bricksandmortar.recipe.BricksRecipe;
 import net.nyrheim.penandpaper.character.PenCharacter;
 import net.nyrheim.penandpaper.character.PenCharacterService;
@@ -27,8 +28,10 @@ import java.util.stream.Collectors;
 
 import static java.lang.Math.min;
 import static org.bukkit.ChatColor.WHITE;
+import static org.bukkit.ChatColor.YELLOW;
 import static org.bukkit.Material.AIR;
 import static org.bukkit.Sound.BLOCK_ANVIL_USE;
+import static org.bukkit.Sound.ENTITY_PLAYER_LEVELUP;
 
 public final class RecipeGUI implements InventoryHolder {
 
@@ -174,7 +177,7 @@ public final class RecipeGUI implements InventoryHolder {
                     .forEach(item -> player.getWorld().dropItem(player.getLocation(), item));
             updateExhaustion(player, recipe, characterService, character);
             player.setFoodLevel(player.getFoodLevel() - 1);
-            professionService.setExperience(character, professionService.getExperience(character) + recipe.getExperience());
+            updateExperience(player, recipe, character, professionService);
             player.playSound(player.getLocation(), BLOCK_ANVIL_USE, 1f, 1f);
             player.closeInventory();
         }
@@ -189,6 +192,18 @@ public final class RecipeGUI implements InventoryHolder {
         ExhaustionTier newExhaustionTier = ExhaustionTier.forExhaustionValue(newExhaustion);
         if (oldExhaustionTier != newExhaustionTier) {
             player.sendMessage(newExhaustionTier.getMessageSelf());
+        }
+    }
+
+    private void updateExperience(Player player, BricksRecipe recipe, PenCharacter character, BricksProfessionService professionService) {
+        int oldExperience = professionService.getExperience(character);
+        int oldLevel = ProfessionExperienceLookupTable.getLevelAtExperience(oldExperience);
+        int newExperience = oldExperience + recipe.getExperience();
+        professionService.setExperience(character, newExperience);
+        int newLevel = ProfessionExperienceLookupTable.getLevelAtExperience(newExperience);
+        if (newLevel > oldLevel) {
+            player.playSound(player.getLocation(), ENTITY_PLAYER_LEVELUP, 1f, 1f);
+            player.sendMessage(YELLOW + "Your extensive work has led to an improvement in your knowledge.");
         }
     }
 
