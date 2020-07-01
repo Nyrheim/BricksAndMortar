@@ -4,3 +4,4 @@ database:
   password: password
 nodes:
   exhaustion: 5
+  experience: 5
