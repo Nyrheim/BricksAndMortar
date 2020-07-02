@@ -16,6 +16,10 @@ public final class BricksNodeService {
         this.database = database;
     }
 
+    public List<Node> getNodes() {
+        return database.getTable(NodeTable.class).getAll();
+    }
+
     public Node getNode(NodeId id) {
         return database.getTable(NodeTable.class)
                 .get(id);

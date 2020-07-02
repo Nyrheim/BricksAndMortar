@@ -15,7 +15,9 @@ import org.jooq.Record1;
 import org.jooq.Result;
 
 import java.util.List;
+import java.util.Objects;
 
+import static java.util.stream.Collectors.toList;
 import static net.nyrheim.bricksandmortar.database.jooq.Tables.DROP_TABLE;
 import static net.nyrheim.bricksandmortar.database.jooq.Tables.NODE;
 import static org.jooq.impl.DSL.constraint;
@@ -33,10 +35,10 @@ public final class NodeTable implements Table {
         this.database = database;
         this.cache = database.getCacheManager().createCache("bricksandmortar.node.id",
                 CacheConfigurationBuilder.newCacheConfigurationBuilder(Integer.class, Node.class,
-                        ResourcePoolsBuilder.heap(20L)).build());
+                        ResourcePoolsBuilder.heap(30L)).build());
         this.nameCache = database.getCacheManager().createCache("bricksandmortar.node.name",
                 CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, Integer.class,
-                        ResourcePoolsBuilder.heap(20L)).build());
+                        ResourcePoolsBuilder.heap(30L)).build());
     }
 
     @Override
@@ -222,6 +224,49 @@ public final class NodeTable implements Table {
                 .execute();
         cache.remove(node.getId().getValue());
         nameCache.remove(node.getName());
+    }
+
+    public List<Node> getAll() {
+        return database.create()
+                .select(
+                        NODE.ID,
+                        NODE.NAME,
+                        NODE.WORLD,
+                        NODE.MIN_X,
+                        NODE.MIN_Y,
+                        NODE.MIN_Z,
+                        NODE.MAX_X,
+                        NODE.MAX_Y,
+                        NODE.MAX_Z,
+                        NODE.DROP_TABLE_ID
+                )
+                .from(NODE)
+                .fetch()
+                .map(result -> {
+                    World world = plugin.getServer().getWorld(result.get(NODE.WORLD));
+                    if (world == null) return null;
+                    return new Node(
+                            new NodeId(result.get(NODE.ID)),
+                            result.get(NODE.NAME),
+                            world,
+                            new Location(
+                                    world,
+                                    result.get(NODE.MIN_X),
+                                    result.get(NODE.MIN_Y),
+                                    result.get(NODE.MIN_Z)
+                            ),
+                            new Location(
+                                    world,
+                                    result.get(NODE.MAX_X),
+                                    result.get(NODE.MAX_Y),
+                                    result.get(NODE.MAX_Z)
+                            ),
+                            database.getTable(DropTableTable.class).get(new DropTableId(result.get(NODE.DROP_TABLE_ID)))
+                    );
+                })
+                .stream()
+                .filter(Objects::nonNull)
+                .collect(toList());
     }
 
 }

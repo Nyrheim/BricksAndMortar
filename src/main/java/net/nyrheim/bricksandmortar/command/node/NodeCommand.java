@@ -15,11 +15,13 @@ public final class NodeCommand implements CommandExecutor {
     private final BricksAndMortar plugin;
     private final NodeCreateCommand nodeCreateCommand;
     private final NodeDeleteCommand nodeDeleteCommand;
+    private final NodeListCommand nodeListCommand;
 
     public NodeCommand(BricksAndMortar plugin) {
         this.plugin = plugin;
         nodeCreateCommand = new NodeCreateCommand(plugin);
         nodeDeleteCommand = new NodeDeleteCommand(plugin);
+        nodeListCommand = new NodeListCommand(plugin);
     }
 
     @Override
@@ -28,7 +30,7 @@ public final class NodeCommand implements CommandExecutor {
                              @NotNull String label,
                              @NotNull String[] args) {
         if (args.length < 1) {
-            sender.sendMessage(RED + "Usage: /" + label + " [create|delete]");
+            sender.sendMessage(RED + "Usage: /" + label + " [create|delete|list]");
             return true;
         }
         switch (args[0].toLowerCase()) {
@@ -46,8 +48,15 @@ public final class NodeCommand implements CommandExecutor {
                         label,
                         Arrays.stream(args).skip(1).toArray(String[]::new)
                 );
+            case "list":
+                return nodeListCommand.onCommand(
+                        sender,
+                        command,
+                        label,
+                        Arrays.stream(args).skip(1).toArray(String[]::new)
+                );
             default:
-                sender.sendMessage(RED + "Usage: /" + label + " [create|delete]");
+                sender.sendMessage(RED + "Usage: /" + label + " [create|delete|list]");
                 break;
         }
         return true;
