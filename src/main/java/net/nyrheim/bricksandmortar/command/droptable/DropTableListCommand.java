@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import static net.md_5.bungee.api.chat.ClickEvent.Action.RUN_COMMAND;
 import static net.md_5.bungee.api.chat.HoverEvent.Action.SHOW_TEXT;
 import static org.bukkit.ChatColor.RED;
+import static org.bukkit.ChatColor.WHITE;
 
 public final class DropTableListCommand implements CommandExecutor {
     private final BricksAndMortar plugin;
@@ -31,9 +32,10 @@ public final class DropTableListCommand implements CommandExecutor {
             sender.sendMessage(RED + "You do not have permission to list drop tables.");
             return true;
         }
+        sender.sendMessage(WHITE + "Drop tables:");
         BricksNodeService nodeService = plugin.getServices().get(BricksNodeService.class);
         nodeService.getDropTables().forEach(dropTable -> {
-            TextComponent dropTableButton = new TextComponent(dropTable.getName());
+            TextComponent dropTableButton = new TextComponent(" \u2022 " + dropTable.getName());
             dropTableButton.setHoverEvent(new HoverEvent(
                     SHOW_TEXT,
                     new ComponentBuilder("Click here to view drop table " + dropTable.getName()).create()

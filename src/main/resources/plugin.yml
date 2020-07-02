@@ -25,6 +25,7 @@ commands:
       Node management command
       /node create [name] [drop table] - Creates a node using your current selection
       /node delete [name] - Deletes a node
+      /node list - Lists nodes
   droptable:
     description: |
       Drop table management command
@@ -40,6 +41,9 @@ permissions:
     default: op
   bricksandmortar.command.node.delete:
     description: Allows deletion of nodes
+    default: op
+  bricksandmortar.command.node.list:
+    description: Allows listing nodes
     default: op
   bricksandmortar.command.droptable.additem:
     description: Allows adding items to drop tables
