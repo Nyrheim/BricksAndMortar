@@ -1420,8 +1420,8 @@ public final class BricksRecipeService {
                     put(POTASH, 1);
                     put(FINE_SAND, 1);
                 }},
-                20,
-                20
+                10,
+                10
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1512,8 +1512,8 @@ public final class BricksRecipeService {
                     put(VIAL, 1);
                     put(AMARELL, 4);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1526,8 +1526,8 @@ public final class BricksRecipeService {
                     put(POTION_OF_HEALING, 1);
                     put(HILLCAT_BLOOD, 1);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1540,8 +1540,8 @@ public final class BricksRecipeService {
                     put(VIAL, 1);
                     put(ASHBLOOM, 4);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1554,8 +1554,8 @@ public final class BricksRecipeService {
                     put(POTION_OF_HEALING, 1);
                     put(ASHBLOOM, 2);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1569,8 +1569,8 @@ public final class BricksRecipeService {
                     put(ASHBLOOM, 2);
                     put(GIANTS_ROOT, 2);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1584,8 +1584,8 @@ public final class BricksRecipeService {
                     put(WOOLEN_BLOOD, 3);
                     put(GIANTS_ROOT, 1);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1598,8 +1598,8 @@ public final class BricksRecipeService {
                     put(VIAL, 1);
                     put(GILLIWEED, 4);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1612,8 +1612,8 @@ public final class BricksRecipeService {
                     put(VIAL, 1);
                     put(CANDETINE, 4);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1627,8 +1627,8 @@ public final class BricksRecipeService {
                     put(RABBITS_EYE, 3);
                     put(ASHBLOOM, 1);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1642,8 +1642,8 @@ public final class BricksRecipeService {
                     put(GILLIWEED, 2);
                     put(GIANTS_ROOT, 2);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1658,8 +1658,8 @@ public final class BricksRecipeService {
                     put(ASHBLOOM, 1);
                     put(MILK, 1);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1673,8 +1673,8 @@ public final class BricksRecipeService {
                     put(WOOLEN_BLOOD, 2);
                     put(ASHBLOOM, 4);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1687,8 +1687,8 @@ public final class BricksRecipeService {
                     put(ACID_VIAL, 1);
                     put(SKINSBANE, 1);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1701,8 +1701,8 @@ public final class BricksRecipeService {
                     put(VIAL, 1);
                     put(AMARELL, 8);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1716,8 +1716,8 @@ public final class BricksRecipeService {
                     put(GLUE, 3);
                     put(POTASH, 4);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1730,8 +1730,8 @@ public final class BricksRecipeService {
                     put(VIAL, 1);
                     put(ASHBLOOM, 8);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1744,8 +1744,8 @@ public final class BricksRecipeService {
                     put(VIAL, 1);
                     put(CANDETINE, 12);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1759,8 +1759,8 @@ public final class BricksRecipeService {
                     put(RABBITS_EYE, 2);
                     put(FLUX, 4);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1773,8 +1773,8 @@ public final class BricksRecipeService {
                     put(POTASH, 10);
                     put(FINE_SAND, 5);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1787,8 +1787,8 @@ public final class BricksRecipeService {
                     put(IRON_INGOT, 1);
                     put(BLASTING_POWDER, 1);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1802,8 +1802,8 @@ public final class BricksRecipeService {
                     put(GLUE, 4);
                     put(BLASTING_POWDER, 1);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.BREWING_STAND,
@@ -1816,8 +1816,8 @@ public final class BricksRecipeService {
                     put(GLUE, 1);
                     put(LIQUOR, 1);
                 }},
-                40,
-                40
+                30,
+                30
         ));
         recipes.add(new BricksRecipe(
                 Material.LOOM,
